@@ -1,8 +1,8 @@
 ---
 summary: "Oracle Cloud Infrastructure Vault SecretRef provider integration."
 read_when:
-  - You are installing, configuring, or auditing the oracle-vault plugin
-title: "Oracle Vault plugin reference"
+  - You are installing, configuring, or auditing the oci-vault plugin
+title: "Oci Vault plugin reference"
 ---
 
 <!-- Generated file. Do not edit by hand.
@@ -14,13 +14,13 @@ Oracle Cloud Infrastructure Vault SecretRef provider integration.
 
 ## Distribution
 
-- Package: `@openclaw/oracle-vault`
+- Package: `@openclaw/oci-vault`
 - Install route: included in OpenClaw
 
 ## Surface
 
-- CLI commands: `openclaw oracle-vault`
+- CLI commands: `openclaw oci-vault`
 
 ## Related docs
 
-- [oracle-vault](/plugins/oracle-vault)
+- [oci-vault](/plugins/oci-vault)

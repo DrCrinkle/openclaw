@@ -1,20 +1,20 @@
 {
-  "id": "oracle-vault",
-  "name": "Oracle Vault",
+  "id": "oci-vault",
+  "name": "OCI Vault",
   "description": "Oracle Cloud Infrastructure Vault SecretRef provider integration.",
   "cliCommands": [
-    { "name": "oracle-vault", "description": "Manage Oracle Vault SecretRefs", "hasSubcommands": true }
+    { "name": "oci-vault", "description": "Manage OCI Vault SecretRefs", "hasSubcommands": true }
   ],
-  "activation": { "onStartup": false, "onCommands": ["oracle-vault"] },
-  "commandAliases": [{ "name": "oracle-vault", "kind": "cli" }],
+  "activation": { "onStartup": false, "onCommands": ["oci-vault"] },
+  "commandAliases": [{ "name": "oci-vault", "kind": "cli" }],
   "secretProviderIntegrations": {
-    "oracle-vault": {
-      "providerAlias": "oracle-vault",
+    "oci-vault": {
+      "providerAlias": "oci-vault",
       "displayName": "Oracle Cloud Infrastructure Vault",
       "description": "Resolve OpenClaw exec SecretRefs from OCI Vault secret bundles.",
       "source": "exec",
       "command": "${node}",
-      "args": ["./oracle-vault-secret-ref-resolver.js"],
+      "args": ["./oci-vault-secret-ref-resolver.js"],
       "timeoutMs": 30000,
       "noOutputTimeoutMs": 30000,
       "maxOutputBytes": 1048576,

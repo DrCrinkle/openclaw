@@ -2,7 +2,7 @@
 
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
-import { parseOracleVaultSecretId } from "./oracle-vault-secret-id.js";
+import { parseOciVaultSecretId } from "./oci-vault-secret-id.js";
 
 const execFileAsync = promisify(execFile);
 const MAX_OUTPUT_BYTES = 1024 * 1024;
@@ -46,7 +46,7 @@ function selectorValue(value, selector) {
 }
 
 async function readSecret(id) {
-  const { secretId, selector } = parseOracleVaultSecretId(id);
+  const { secretId, selector } = parseOciVaultSecretId(id);
   const args = [
     "secrets", "secret-bundle", "get",
     "--secret-id", secretId,

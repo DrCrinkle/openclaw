@@ -130,6 +130,8 @@ Each entry lists the package, distribution route, and description.
 
 - **[oc-path](/plugins/reference/oc-path)** (`@openclaw/oc-path`) - included in OpenClaw. Adds the openclaw path CLI for oc:// workspace file addressing.
 
+- **[oci-vault](/plugins/reference/oci-vault)** (`@openclaw/oci-vault`) - included in OpenClaw. Oracle Cloud Infrastructure Vault SecretRef provider integration.
+
 - **[ollama](/plugins/reference/ollama)** (`@openclaw/ollama-provider`) - included in OpenClaw. Adds Ollama, Ollama Cloud model provider support to OpenClaw.
 
 - **[onepassword](/plugins/reference/onepassword)** (`@openclaw/onepassword`) - included in OpenClaw. 1Password SecretRef resolver and curated agent broker with approval policy and SQLite audit history.
@@ -139,8 +141,6 @@ Each entry lists the package, distribution route, and description.
 - **[opencode-go](/plugins/reference/opencode-go)** (`@openclaw/opencode-go-provider`) - included in OpenClaw. Adds OpenCode Go model provider support to OpenClaw.
 
 - **[openrouter](/plugins/reference/openrouter)** (`@openclaw/openrouter-provider`) - included in OpenClaw. Adds OpenRouter model provider support to OpenClaw.
-
-- **[oracle-vault](/plugins/reference/oracle-vault)** (`@openclaw/oracle-vault`) - included in OpenClaw. Oracle Cloud Infrastructure Vault SecretRef provider integration.
 
 - **[policy](/plugins/reference/policy)** (`@openclaw/policy`) - included in OpenClaw. Adds policy-backed doctor checks for workspace conformance.
 

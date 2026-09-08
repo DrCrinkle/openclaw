@@ -1717,7 +1717,7 @@
                     "pages": [
                       "plugins/onepassword",
                       "plugins/vault",
-                      "plugins/oracle-vault"
+                      "plugins/oci-vault"
                     ]
                   },
                   {

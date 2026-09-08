@@ -5,16 +5,16 @@ import { spawn } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { afterEach, describe, expect, it } from "vitest";
 
-const resolverPath = fileURLToPath(new URL("../oracle-vault-secret-ref-resolver.js", import.meta.url));
+const resolverPath = fileURLToPath(new URL("../oci-vault-secret-ref-resolver.js", import.meta.url));
 const tempPaths: string[] = [];
 
 afterEach(async () => {
   await Promise.all(tempPaths.splice(0).map((target) => rm(target, { force: true, recursive: true })));
 });
 
-describe("Oracle Vault SecretRef resolver", () => {
+describe("OCI Vault SecretRef resolver", () => {
   it("decodes OCI base64 content and selects JSON fields without exposing the value to config", async () => {
-    const dir = await mkdtemp(path.join(os.tmpdir(), "openclaw-oracle-vault-test-"));
+    const dir = await mkdtemp(path.join(os.tmpdir(), "openclaw-oci-vault-test-"));
     tempPaths.push(dir);
     const fakeOci = path.join(dir, "oci");
     await writeFile(fakeOci, `#!/usr/bin/env node\nprocess.stdout.write(Buffer.from(JSON.stringify({apiKey: "fixture-secret"})).toString("base64"));\n`);

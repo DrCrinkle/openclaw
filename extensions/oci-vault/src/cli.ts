@@ -5,28 +5,28 @@ import { createPluginSecretRefSetupCli } from "openclaw/plugin-sdk/secret-ref-ru
 import { pathExists } from "openclaw/plugin-sdk/security-runtime";
 import { normalizeOptionalString } from "openclaw/plugin-sdk/string-coerce-runtime";
 import { resolvePreferredOpenClawTmpDir } from "openclaw/plugin-sdk/temp-path";
-import { parseOracleVaultSecretId } from "../oracle-vault-secret-id.js";
+import { parseOciVaultSecretId } from "../oci-vault-secret-id.js";
 
-const PROVIDER_ALIAS = "oracle-vault";
+const PROVIDER_ALIAS = "oci-vault";
 const setupCli = createPluginSecretRefSetupCli({
-  productName: "Oracle Vault",
+  productName: "OCI Vault",
   secretIdLabel: "OCI secret OCID",
   secretIdPlaceholder: "ocid1.secret.oc1...",
   defaultProviderAlias: PROVIDER_ALIAS,
-  pluginIntegration: { pluginId: "oracle-vault", integrationId: "oracle-vault" },
+  pluginIntegration: { pluginId: "oci-vault", integrationId: "oci-vault" },
   normalizeSecretId(value: string) {
-    parseOracleVaultSecretId(value);
+    parseOciVaultSecretId(value);
     return value;
   },
-  defaultPlanPath: () => path.join(resolvePreferredOpenClawTmpDir(), `openclaw-oracle-vault-${process.pid}.json`),
+  defaultPlanPath: () => path.join(resolvePreferredOpenClawTmpDir(), `openclaw-oci-vault-${process.pid}.json`),
 });
 
 type CommandLike = Parameters<typeof setupCli.registerSetupCommand>[0];
 
 async function resolverPath(): Promise<string> {
   const candidates = [
-    fileURLToPath(new URL("../oracle-vault-secret-ref-resolver.js", import.meta.url)),
-    fileURLToPath(new URL("./extensions/oracle-vault/oracle-vault-secret-ref-resolver.js", import.meta.url)),
+    fileURLToPath(new URL("../oci-vault-secret-ref-resolver.js", import.meta.url)),
+    fileURLToPath(new URL("./extensions/oci-vault/oci-vault-secret-ref-resolver.js", import.meta.url)),
   ];
   for (const candidate of candidates) {
     if (await pathExists(candidate)) {
@@ -36,10 +36,10 @@ async function resolverPath(): Promise<string> {
   return candidates[0];
 }
 
-export function registerOracleVaultCommands(params: { program: CommandLike; config: OpenClawConfig }): void {
-  const command = params.program.command("oracle-vault").description("Manage Oracle Vault SecretRefs");
+export function registerOciVaultCommands(params: { program: CommandLike; config: OpenClawConfig }): void {
+  const command = params.program.command("oci-vault").description("Manage OCI Vault SecretRefs");
   command.command("status")
-    .description("Show Oracle Vault provider status without printing credentials")
+    .description("Show OCI Vault provider status without printing credentials")
     .option("--json", "Print JSON status")
     .action(async (options: { json?: boolean }) => {
       const inspected = setupCli.inspectProvider(params.config);
@@ -54,7 +54,7 @@ export function registerOracleVaultCommands(params: { program: CommandLike; conf
         configFile: Boolean(normalizeOptionalString(process.env.OCI_CLI_CONFIG_FILE)),
       };
       process.stdout.write(options.json ? `${JSON.stringify(result, null, 2)}\n` :
-        `Oracle Vault provider: ${inspected.provider.configured ? "configured" : "not configured"}\n` +
+        `OCI Vault provider: ${inspected.provider.configured ? "configured" : "not configured"}\n` +
         `Auth: ${result.auth}\nOCI CLI: ${result.cli}\nResolver: ${result.resolverScript}\n`);
     });
   setupCli.registerSetupCommand(command);
