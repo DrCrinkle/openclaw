@@ -937,6 +937,7 @@ This store page manages values only. Configure the corresponding `store` SecretR
 - [Authentication](/gateway/authentication) - auth setup
 - [CLI: secrets](/cli/secrets) - CLI commands
 - [Vault SecretRefs](/plugins/vault) - HashiCorp Vault provider setup
+- [Oracle Vault SecretRefs](/plugins/oracle-vault) - Oracle Cloud Infrastructure Vault provider setup
 - [Environment Variables](/help/environment) - environment precedence
 - [SecretRef Credential Surface](/reference/secretref-credential-surface) - credential surface
 - [Secrets Apply Plan Contract](/gateway/secrets-plan-contract) - plan contract details

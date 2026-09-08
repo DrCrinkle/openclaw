@@ -1716,7 +1716,8 @@
                     "group": "Secrets and vaults",
                     "pages": [
                       "plugins/onepassword",
-                      "plugins/vault"
+                      "plugins/vault",
+                      "plugins/oracle-vault"
                     ]
                   },
                   {

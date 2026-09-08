@@ -1,0 +1,19 @@
+{
+  "name": "@openclaw/oracle-vault",
+  "version": "2026.9.2",
+  "private": true,
+  "description": "Oracle Cloud Infrastructure Vault SecretRef provider integration for OpenClaw",
+  "type": "module",
+  "devDependencies": {
+    "@openclaw/plugin-sdk": "workspace:*"
+  },
+  "openclaw": {
+    "extensions": ["./index.ts"],
+    "build": {
+      "staticAssets": [
+        { "source": "./oracle-vault-secret-ref-resolver.js", "output": "oracle-vault-secret-ref-resolver.js" },
+        { "source": "./oracle-vault-secret-id.js", "output": "oracle-vault-secret-id.js" }
+      ]
+    }
+  }
+}
