@@ -8,12 +8,24 @@
     "@openclaw/plugin-sdk": "workspace:*"
   },
   "openclaw": {
-    "extensions": ["./index.ts"],
+    "extensions": [
+      "./index.ts"
+    ],
     "build": {
       "staticAssets": [
-        { "source": "./oci-vault-secret-ref-resolver.js", "output": "oci-vault-secret-ref-resolver.js" },
-        { "source": "./oci-vault-secret-id.js", "output": "oci-vault-secret-id.js" }
+        {
+          "source": "./oci-vault-secret-ref-resolver.js",
+          "output": "oci-vault-secret-ref-resolver.js"
+        },
+        {
+          "source": "./oci-vault-secret-id.js",
+          "output": "oci-vault-secret-id.js"
+        }
       ]
     }
+  },
+  "dependencies": {
+    "oci-common": "2.140.0",
+    "oci-secrets": "2.140.0"
   }
 }

@@ -18,7 +18,8 @@ const setupCli = createPluginSecretRefSetupCli({
     parseOciVaultSecretId(value);
     return value;
   },
-  defaultPlanPath: () => path.join(resolvePreferredOpenClawTmpDir(), `openclaw-oci-vault-${process.pid}.json`),
+  defaultPlanPath: () =>
+    path.join(resolvePreferredOpenClawTmpDir(), `openclaw-oci-vault-${process.pid}.json`),
 });
 
 type CommandLike = Parameters<typeof setupCli.registerSetupCommand>[0];
@@ -26,7 +27,9 @@ type CommandLike = Parameters<typeof setupCli.registerSetupCommand>[0];
 async function resolverPath(): Promise<string> {
   const candidates = [
     fileURLToPath(new URL("../oci-vault-secret-ref-resolver.js", import.meta.url)),
-    fileURLToPath(new URL("./extensions/oci-vault/oci-vault-secret-ref-resolver.js", import.meta.url)),
+    fileURLToPath(
+      new URL("./extensions/oci-vault/oci-vault-secret-ref-resolver.js", import.meta.url),
+    ),
   ];
   for (const candidate of candidates) {
     if (await pathExists(candidate)) {
@@ -36,9 +39,13 @@ async function resolverPath(): Promise<string> {
   return candidates[0];
 }
 
-export function registerOciVaultCommands(params: { program: CommandLike; config: OpenClawConfig }): void {
+export function registerOciVaultCommands(params: {
+  program: CommandLike;
+  config: OpenClawConfig;
+}): void {
   const command = params.program.command("oci-vault").description("Manage OCI Vault SecretRefs");
-  command.command("status")
+  command
+    .command("status")
     .description("Show OCI Vault provider status without printing credentials")
     .option("--json", "Print JSON status")
     .action(async (options: { json?: boolean }) => {
@@ -46,6 +53,7 @@ export function registerOciVaultCommands(params: { program: CommandLike; config:
       const result = {
         providerAlias: PROVIDER_ALIAS,
         provider: inspected.provider,
+        backend: normalizeOptionalString(process.env.OPENCLAW_OCI_BACKEND) ?? "sdk",
         resolverScript: await resolverPath(),
         auth: normalizeOptionalString(process.env.OPENCLAW_OCI_AUTH) ?? "instance_principal",
         cli: normalizeOptionalString(process.env.OPENCLAW_OCI_CLI_PATH) ?? "oci",
@@ -53,9 +61,12 @@ export function registerOciVaultCommands(params: { program: CommandLike; config:
         profile: normalizeOptionalString(process.env.OCI_CLI_PROFILE),
         configFile: Boolean(normalizeOptionalString(process.env.OCI_CLI_CONFIG_FILE)),
       };
-      process.stdout.write(options.json ? `${JSON.stringify(result, null, 2)}\n` :
-        `OCI Vault provider: ${inspected.provider.configured ? "configured" : "not configured"}\n` +
-        `Auth: ${result.auth}\nOCI CLI: ${result.cli}\nResolver: ${result.resolverScript}\n`);
+      process.stdout.write(
+        options.json
+          ? `${JSON.stringify(result, null, 2)}\n`
+          : `OCI Vault provider: ${inspected.provider.configured ? "configured" : "not configured"}\n` +
+              `Backend: ${result.backend}\nAuth: ${result.auth}\nOCI CLI: ${result.cli}\nResolver: ${result.resolverScript}\n`,
+      );
     });
   setupCli.registerSetupCommand(command);
 }

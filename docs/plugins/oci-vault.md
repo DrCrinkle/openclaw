@@ -8,7 +8,7 @@ title: "OCI Vault SecretRefs"
 
 # OCI Vault SecretRefs
 
-The bundled `oci-vault` plugin resolves SecretRefs from Oracle Cloud Infrastructure Vault through the OCI CLI. It keeps the resolved value in OpenClaw's runtime snapshot and leaves only the SecretRef in configuration.
+The bundled `oci-vault` plugin resolves SecretRefs from Oracle Cloud Infrastructure Vault through Oracle's native Node SDK. On OCI Compute, Instance Principal authentication works without installing the OCI CLI. It keeps the resolved value in OpenClaw's runtime snapshot and leaves only the SecretRef in configuration.
 
 Enable the plugin and inspect its non-secret status:
 
@@ -23,7 +23,7 @@ On OCI compute, instance principals avoid storing a user token:
 export OPENCLAW_OCI_AUTH=instance_principal
 ```
 
-The plugin also accepts OCI CLI authentication modes such as `resource_principal`, `security_token`, `delegation_token`, `oke_workload_identity`, and `api_key`. The service environment must contain the corresponding OCI CLI configuration. Set `OCI_CLI_CONFIG_FILE`, `OCI_CLI_PROFILE`, `OCI_CLI_REGION`, or `OPENCLAW_OCI_CLI_PATH` when the defaults do not apply.
+For API-key authentication outside OCI Compute, set `OPENCLAW_OCI_AUTH=api_key` and provide `OCI_CLI_CONFIG_FILE` and `OCI_CLI_PROFILE` as needed. Set `OCI_CLI_REGION` when the secret is outside the instance's default region. Set `OPENCLAW_OCI_BACKEND=cli` explicitly if you need OCI CLI authentication modes such as `resource_principal`, `security_token`, `delegation_token`, or `oke_workload_identity`.
 
 Create and apply a SecretRef plan:
 

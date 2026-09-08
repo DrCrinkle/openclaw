@@ -19,6 +19,7 @@
       "noOutputTimeoutMs": 30000,
       "maxOutputBytes": 1048576,
       "passEnv": [
+        "OPENCLAW_OCI_BACKEND",
         "OPENCLAW_OCI_AUTH",
         "OPENCLAW_OCI_SECRET_STAGE",
         "OPENCLAW_OCI_TIMEOUT_MS",
